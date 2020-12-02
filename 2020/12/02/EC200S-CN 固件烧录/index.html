@@ -6,24 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>刘大的博客</title>
+  <title>EC200S-CN更新固件 | 刘大的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: EC200S-CN更新固件0. 前言 工具准备：USB线（用于连接电脑和4G模组），最好是接到外置的 USB 转Hub上，防止外部短路直接导致烧坏电脑主板。 注意事项，由于是 USB 2.0 所以要注意一下，焊接的线序如下（线序不能错）：   1. 具体操作 首先除USB的供电外，还需要接模组的主供电，把USB线接到电脑USB口上，然后给模组的PWK引脚一个高电平（最好引出来一根线">
+  <meta name="description" content="0. 前言 工具准备：USB线（用于连接电脑和4G模组），最好是接到外置的 USB 转Hub上，防止外部短路直接导致烧坏电脑主板。 注意事项，由于是 USB 2.0 所以要注意一下，焊接的线序如下（线序不能错）：   1. 具体操作 首先除USB的供电外，还需要接模组的主供电，把USB线接到电脑USB口上，然后给模组的PWK引脚一个高电平（最好引出来一根线，用于手动激活）激活模组，激活后在设备管理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="刘大的博客">
+<meta property="og:title" content="EC200S-CN更新固件">
 <meta property="og:url" content="http://yoursite.com/2020/12/02/EC200S-CN 固件烧录/index.html">
 <meta property="og:site_name" content="刘大的博客">
-<meta property="og:description" content="title: EC200S-CN更新固件0. 前言 工具准备：USB线（用于连接电脑和4G模组），最好是接到外置的 USB 转Hub上，防止外部短路直接导致烧坏电脑主板。 注意事项，由于是 USB 2.0 所以要注意一下，焊接的线序如下（线序不能错）：   1. 具体操作 首先除USB的供电外，还需要接模组的主供电，把USB线接到电脑USB口上，然后给模组的PWK引脚一个高电平（最好引出来一根线">
+<meta property="og:description" content="0. 前言 工具准备：USB线（用于连接电脑和4G模组），最好是接到外置的 USB 转Hub上，防止外部短路直接导致烧坏电脑主板。 注意事项，由于是 USB 2.0 所以要注意一下，焊接的线序如下（线序不能错）：   1. 具体操作 首先除USB的供电外，还需要接模组的主供电，把USB线接到电脑USB口上，然后给模组的PWK引脚一个高电平（最好引出来一根线，用于手动激活）激活模组，激活后在设备管理">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20201127091202.png">
 <meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20201127095617.png">
 <meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20201127095712.png">
 <meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20201127095722.png">
 <meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20201127095729.png">
-<meta property="og:updated_time" content="2020-12-02T06:26:41.302Z">
+<meta property="og:updated_time" content="2020-12-02T06:35:57.117Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="刘大的博客">
-<meta name="twitter:description" content="title: EC200S-CN更新固件0. 前言 工具准备：USB线（用于连接电脑和4G模组），最好是接到外置的 USB 转Hub上，防止外部短路直接导致烧坏电脑主板。 注意事项，由于是 USB 2.0 所以要注意一下，焊接的线序如下（线序不能错）：   1. 具体操作 首先除USB的供电外，还需要接模组的主供电，把USB线接到电脑USB口上，然后给模组的PWK引脚一个高电平（最好引出来一根线">
+<meta name="twitter:title" content="EC200S-CN更新固件">
+<meta name="twitter:description" content="0. 前言 工具准备：USB线（用于连接电脑和4G模组），最好是接到外置的 USB 转Hub上，防止外部短路直接导致烧坏电脑主板。 注意事项，由于是 USB 2.0 所以要注意一下，焊接的线序如下（线序不能错）：   1. 具体操作 首先除USB的供电外，还需要接模组的主供电，把USB线接到电脑USB口上，然后给模组的PWK引脚一个高电平（最好引出来一根线，用于手动激活）激活模组，激活后在设备管理">
 <meta name="twitter:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20201127091202.png">
   
     <link rel="alternative" href="/atom.xml" title="刘大的博客" type="application/atom+xml">
@@ -163,10 +163,24 @@
             <article id="post-EC200S-CN 固件烧录" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      EC200S-CN更新固件
+    </h1>
+  
+
+        
+        <a href="/2020/12/02/EC200S-CN 固件烧录/" class="archive-article-date">
+  	<time datetime="2020-12-02T05:10:27.072Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-02</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<h2 id="title-EC200S-CN更新固件"><a href="#title-EC200S-CN更新固件" class="headerlink" title="title: EC200S-CN更新固件"></a>title: EC200S-CN更新固件</h2><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h4><ol>
+        <h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h4><ol>
 <li>工具准备：USB线（用于连接电脑和4G模组），最好是接到外置的 USB 转Hub上，防止外部短路直接导致烧坏电脑主板。</li>
 <li>注意事项，由于是 USB 2.0 所以要注意一下，焊接的线序如下（线序不能错）：</li>
 </ol>
