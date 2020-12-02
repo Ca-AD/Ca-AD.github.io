@@ -152,6 +152,78 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-EC200S-CN 固件烧录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h4 id="EC200S-CN更新固件"><a href="#EC200S-CN更新固件" class="headerlink" title="EC200S-CN更新固件"></a>EC200S-CN更新固件</h4><hr>
+<h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h4><ol>
+<li>工具准备：USB线（用于连接电脑和4G模组），最好是接到外置的 USB 转Hub上，防止外部短路直接导致烧坏电脑主板。</li>
+<li>注意事项，由于是 USB 2.0 所以要注意一下，焊接的线序如下（线序不能错）：</li>
+</ol>
+<p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201127091202.png" alt></p>
+<h4 id="1-具体操作"><a href="#1-具体操作" class="headerlink" title="1. 具体操作"></a>1. 具体操作</h4><ol>
+<li><p>首先除USB的供电外，还需要接模组的主供电，把USB线接到电脑USB口上，然后给模组的PWK引脚一个高电平（最好引出来一根线，用于手动激活）激活模组，激活后在设备管理器里端口查看，会看到如下所示：</p>
+<p> <img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201127095617.png" alt></p>
+</li>
+<li><p>根据如下步骤设置（波特率9600、460800 都可用）</p>
+<ol>
+<li><p>选择你电脑里设备管理器里显示的串口号，例如我的是 COM16，然后按照如下照片步骤操作。</p>
+</li>
+<li><p>如果点击 Start 后没反应或者提示错误，保持模组处于开机模式（即不要断电），重启 QFlash_V4.20，然后在如下的步骤2里，选择你电脑里设备管理器里显示的串口号，例如我的是 COM16，先点击步骤4的 Start，然后给 PWR 一个高电平（让模组关机），再给PWR一个高电平（让模组开机），然后就开始烧录了，如下图2正常烧录所示。</p>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201127095712.png" alt></p>
+<p>  <strong>正常烧录：</strong></p>
+<p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201127095722.png" alt></p>
+<p> <strong>烧录完成：</strong></p>
+<p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201127095729.png" alt></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/02/EC200S-CN 固件烧录/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Typora + gitee云图床建立" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
