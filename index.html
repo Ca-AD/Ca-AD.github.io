@@ -158,8 +158,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h4 id="EC200S-CN更新固件"><a href="#EC200S-CN更新固件" class="headerlink" title="EC200S-CN更新固件"></a>EC200S-CN更新固件</h4><hr>
-<h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h4><ol>
+<h2 id="title-EC200S-CN更新固件"><a href="#title-EC200S-CN更新固件" class="headerlink" title="title: EC200S-CN更新固件"></a>title: EC200S-CN更新固件</h2><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h4><ol>
 <li>工具准备：USB线（用于连接电脑和4G模组），最好是接到外置的 USB 转Hub上，防止外部短路直接导致烧坏电脑主板。</li>
 <li>注意事项，由于是 USB 2.0 所以要注意一下，焊接的线序如下（线序不能错）：</li>
 </ol>
@@ -304,83 +303,6 @@
 
 
   
-    <article id="post-K210 ——又来一个好玩的东西（图传）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/02/K210 ——又来一个好玩的东西（图传）/">K210 ——又来一个好玩的东西（图传）</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/02/K210 ——又来一个好玩的东西（图传）/" class="archive-article-date">
-  	<time datetime="2020-12-02T01:41:10.310Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这个是啥？</p>
-<hr>
-<p>​        出于对物联网兴趣在加上疫情在家自我隔离的缘故，制作本次 K210 高性能人工智能板卡的远程拍照，以及拍摄一小段视频的小Demo。</p>
-<p>​       后续的计划：</p>
-<ol>
-<li>板卡与通信模组通信，把拍摄的视频上传到服务器并在网页调用展示出来。</li>
-<li>制作app调用服务器视频流和照片。</li>
-</ol>
-<p>先看下本次拍摄照片并保存的代码    </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import sensor, image,lcd</span><br><span class="line"></span><br><span class="line">RED_LED_PIN = 1</span><br><span class="line">BLUE_LED_PIN = 3</span><br><span class="line"></span><br><span class="line">sensor.reset() # Initialize the camera sensor.</span><br><span class="line">sensor.set_pixformat(sensor.RGB565) # or sensor.GRAYSCALE</span><br><span class="line">sensor.set_framesize(sensor.QVGA) # or sensor.QQVGA (or others)</span><br><span class="line">sensor.skip_frames(10) # Let new settings take affect.</span><br><span class="line">sensor.set_framesize(sensor.QVGA)</span><br><span class="line">#红灯亮</span><br><span class="line">#pyb.LED(RED_LED_PIN).on()</span><br><span class="line">sensor.skip_frames(300) # Give the user time to get ready.</span><br><span class="line"></span><br><span class="line">#红灯灭，蓝灯亮</span><br><span class="line">#pyb.LED(RED_LED_PIN).off()</span><br><span class="line">#pyb.LED(BLUE_LED_PIN).on()</span><br><span class="line"></span><br><span class="line">#保存截取到的图片到SD卡</span><br><span class="line">print(&quot;You&apos;re on camera!&quot;)</span><br><span class="line">img=sensor.snapshot()				  # 把截取到的图片数据存储在img 里</span><br><span class="line">lcd.display(img)					  # 显示到屏幕上</span><br><span class="line">sensor.snapshot().save(&quot;example.jpg&quot;) # 保存到SD卡里并署名为 example.jpg</span><br><span class="line"></span><br><span class="line">#pyb.LED(BLUE_LED_PIN).off()</span><br><span class="line">print(&quot;Done! Reset the camera to see the saved image.&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>本次实物效果如下：</p>
-<p><strong><img src="/2020/12/02/K210%20——又来一个好玩的东西（图传）/code.png" title="This is an test image"></strong></p>
-<p><strong><img src="/2020/12/02/K210%20——又来一个好玩的东西（图传）/Physical.jpg" title="This is an test image"></strong></p>
-<p>陆续更新中…</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/02/K210 ——又来一个好玩的东西（图传）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-NBIOT_M531101" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -433,6 +355,83 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/12/02/NBIOT_M531101/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-K210 ——又来一个好玩的东西（图传）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/02/K210 ——又来一个好玩的东西（图传）/">K210 ——又来一个好玩的东西（图传）</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/02/K210 ——又来一个好玩的东西（图传）/" class="archive-article-date">
+  	<time datetime="2020-12-02T01:41:10.310Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这个是啥？</p>
+<hr>
+<p>​        出于对物联网兴趣在加上疫情在家自我隔离的缘故，制作本次 K210 高性能人工智能板卡的远程拍照，以及拍摄一小段视频的小Demo。</p>
+<p>​       后续的计划：</p>
+<ol>
+<li>板卡与通信模组通信，把拍摄的视频上传到服务器并在网页调用展示出来。</li>
+<li>制作app调用服务器视频流和照片。</li>
+</ol>
+<p>先看下本次拍摄照片并保存的代码    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import sensor, image,lcd</span><br><span class="line"></span><br><span class="line">RED_LED_PIN = 1</span><br><span class="line">BLUE_LED_PIN = 3</span><br><span class="line"></span><br><span class="line">sensor.reset() # Initialize the camera sensor.</span><br><span class="line">sensor.set_pixformat(sensor.RGB565) # or sensor.GRAYSCALE</span><br><span class="line">sensor.set_framesize(sensor.QVGA) # or sensor.QQVGA (or others)</span><br><span class="line">sensor.skip_frames(10) # Let new settings take affect.</span><br><span class="line">sensor.set_framesize(sensor.QVGA)</span><br><span class="line">#红灯亮</span><br><span class="line">#pyb.LED(RED_LED_PIN).on()</span><br><span class="line">sensor.skip_frames(300) # Give the user time to get ready.</span><br><span class="line"></span><br><span class="line">#红灯灭，蓝灯亮</span><br><span class="line">#pyb.LED(RED_LED_PIN).off()</span><br><span class="line">#pyb.LED(BLUE_LED_PIN).on()</span><br><span class="line"></span><br><span class="line">#保存截取到的图片到SD卡</span><br><span class="line">print(&quot;You&apos;re on camera!&quot;)</span><br><span class="line">img=sensor.snapshot()				  # 把截取到的图片数据存储在img 里</span><br><span class="line">lcd.display(img)					  # 显示到屏幕上</span><br><span class="line">sensor.snapshot().save(&quot;example.jpg&quot;) # 保存到SD卡里并署名为 example.jpg</span><br><span class="line"></span><br><span class="line">#pyb.LED(BLUE_LED_PIN).off()</span><br><span class="line">print(&quot;Done! Reset the camera to see the saved image.&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>本次实物效果如下：</p>
+<p><strong><img src="/2020/12/02/K210%20——又来一个好玩的东西（图传）/code.png" title="This is an test image"></strong></p>
+<p><strong><img src="/2020/12/02/K210%20——又来一个好玩的东西（图传）/Physical.jpg" title="This is an test image"></strong></p>
+<p>陆续更新中…</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/02/K210 ——又来一个好玩的东西（图传）/">展开全文 >></a>
         </p>
       
 
