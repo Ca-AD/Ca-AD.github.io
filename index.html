@@ -152,6 +152,146 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Thingsboard" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/12/Thingsboard/">ThingsBoard 环境搭建+数据传输</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/12/Thingsboard/" class="archive-article-date">
+  	<time datetime="2020-12-12T10:42:40.152Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a><strong>0. 前言</strong></h5><p>需要准备的工具如下</p>
+<ol>
+<li><p>硬件： Win10电脑（最少8G RAM ）</p>
+</li>
+<li><p>软件：Docker         <a href="https://www.docker.com/get-started" target="_blank" rel="noopener">https://www.docker.com/get-started</a>  </p>
+<p> ​          Chrome 浏览器  </p>
+<p> ​          MQTTX           <a href="https://mqttx.app/cn/" target="_blank" rel="noopener">https://mqttx.app/cn/</a> </p>
+<p> <strong>1. Docker 配置</strong></p>
+<p> 参考官网教程：</p>
+<ol>
+<li><p>换阿里源 </p>
+</li>
+<li><p><a href="https://hub.docker.com/r/thingsboard/tb-postgres/?ref=login" target="_blank" rel="noopener">https://hub.docker.com/r/thingsboard/tb-postgres/?ref=login</a></p>
+</li>
+<li><p><a href="http://www.ithingsboard.com/docs/user-guide/install/docker-windows/" target="_blank" rel="noopener">http://www.ithingsboard.com/docs/user-guide/install/docker-windows/</a></p>
+<p>注意需要先拉取    thingsboard/tb-postgres  </p>
+<p>具体步骤： </p>
+</li>
+<li><p>打开w10 cmd 进入如下界面输入   docker pull thingsboard/tb-postgres</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker volume create mytb-data</span><br><span class="line">docker volume create mytb-logs</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -p 9090:9090 -p 1883:1883 -p 5683:5683/udp -v mytb-data:/data -v ~/mytb-logs:/var/log/thingsboard --name mytb --restart always thingsboard/tb-postgres</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>看到 Success 就是安装成功，稍等一会，给Docker 运行ThingsBoard一点时间，看到如下图所示就没问题了。</p>
+<p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212112258.png" alt></p>
+</li>
+</ol>
+</li>
+<li><p>如下所示是我用 MQTTX 软件连接到TB有如下显示。</p>
+</li>
+</ol>
+<pre><code>6. 这时用 Chrome 浏览器访问   http://localhost:9090   =  http://192.168.0.119:9090/login
+
+**2. ThingsBoard 配置**
+
+1. 登录租户管理员然后点击  客户 -- 添加客户 -- 自拟标题  -- 点击添加
+
+    ![](https://gitee.com/liudi123club/images/raw/master/Markdown/20201212113852.png)
+
+2. 设备 --添加设备 --添加新设备 -- 自拟名称 -- 自拟设备类型  -- 点击添加
+
+    ![](https://gitee.com/liudi123club/images/raw/master/Markdown/20201212113812.png)
+
+3. 仪表板库 -- 添加仪表板 --  创建新的仪表板  -- 自拟标题  -- 点击添加
+
+    ![](https://gitee.com/liudi123club/images/raw/master/Markdown/20201212113950.png)
+
+4. 打开仪表板  -- 进入编辑模式 -- 添加新的部件 -- 选择部件 -- Analogue gauges --Temperature --添加部件 -- 填写 -- 实体别名 -- 设备时间/属性 -- 点击添加
+
+
+
+5. 配置连接的用户名如下所示，这个用户名要和MQTTX 配置的名称一样。
+
+    ![](https://gitee.com/liudi123club/images/raw/master/Markdown/20201212113343.png)</code></pre><h5 id="3-MQTTX-配置"><a href="#3-MQTTX-配置" class="headerlink" title="3. MQTTX 配置"></a><strong>3. MQTTX 配置</strong></h5><ol>
+<li><p>查找本机地址  打开选择命令提示符窗口  – ipconfig   </p>
+</li>
+<li><p>根据你联网方式 选择 <strong>无线局域网适配器WLAN</strong> 和 <strong>以太网适配器</strong> 下的 IPV4 地址，如下所示</p>
+<p> 这里我用的WiFi联网 选择无线适配器下 IPV4 地址。</p>
+<p> <img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212112832.png" alt></p>
+</li>
+<li><p>填写配置MQTTX</p>
+<p> <img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212112906.png" alt></p>
+</li>
+<li><p>发送消息 &amp; 接收消息</p>
+<p> 其中主题必须是   v1/devices/me/telemetry  或  v1/devices/me/rpc/request/+  </p>
+<p> 用 json 格式把数据发上去，ThingsBoard会自动解析。</p>
+<p> 上报 topic     v1/devices/me/telemetry                  message 例如 ： { “temp”: “33”} 如下图所示</p>
+<p> <img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212113706.png" alt></p>
+</li>
+</ol>
+<pre><code>订阅 topic     v1/devices/me/rpc/request/+           message 例如 ： { &quot;LED3&quot;: &quot;open&quot;}</code></pre><ol start="5">
+<li><p>打开 Thingsboard 的仪表板，就能看到数据。</p>
+<p> <img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212113444.png" alt></p>
+<p> 如果看不到数据就进入编辑模式，选择一下刚才上传的数据名称就能看到了，如下所示：</p>
+</li>
+</ol>
+<p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212112143.png" alt></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/12/Thingsboard/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-EC200S-CN 固件烧录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -317,6 +457,83 @@
 
 
   
+    <article id="post-K210 ——又来一个好玩的东西（图传）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/02/K210 ——又来一个好玩的东西（图传）/">K210 ——又来一个好玩的东西（图传）</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/02/K210 ——又来一个好玩的东西（图传）/" class="archive-article-date">
+  	<time datetime="2020-12-02T01:41:10.310Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这个是啥？</p>
+<hr>
+<p>​        出于对物联网兴趣在加上疫情在家自我隔离的缘故，制作本次 K210 高性能人工智能板卡的远程拍照，以及拍摄一小段视频的小Demo。</p>
+<p>​       后续的计划：</p>
+<ol>
+<li>板卡与通信模组通信，把拍摄的视频上传到服务器并在网页调用展示出来。</li>
+<li>制作app调用服务器视频流和照片。</li>
+</ol>
+<p>先看下本次拍摄照片并保存的代码    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import sensor, image,lcd</span><br><span class="line"></span><br><span class="line">RED_LED_PIN = 1</span><br><span class="line">BLUE_LED_PIN = 3</span><br><span class="line"></span><br><span class="line">sensor.reset() # Initialize the camera sensor.</span><br><span class="line">sensor.set_pixformat(sensor.RGB565) # or sensor.GRAYSCALE</span><br><span class="line">sensor.set_framesize(sensor.QVGA) # or sensor.QQVGA (or others)</span><br><span class="line">sensor.skip_frames(10) # Let new settings take affect.</span><br><span class="line">sensor.set_framesize(sensor.QVGA)</span><br><span class="line">#红灯亮</span><br><span class="line">#pyb.LED(RED_LED_PIN).on()</span><br><span class="line">sensor.skip_frames(300) # Give the user time to get ready.</span><br><span class="line"></span><br><span class="line">#红灯灭，蓝灯亮</span><br><span class="line">#pyb.LED(RED_LED_PIN).off()</span><br><span class="line">#pyb.LED(BLUE_LED_PIN).on()</span><br><span class="line"></span><br><span class="line">#保存截取到的图片到SD卡</span><br><span class="line">print(&quot;You&apos;re on camera!&quot;)</span><br><span class="line">img=sensor.snapshot()				  # 把截取到的图片数据存储在img 里</span><br><span class="line">lcd.display(img)					  # 显示到屏幕上</span><br><span class="line">sensor.snapshot().save(&quot;example.jpg&quot;) # 保存到SD卡里并署名为 example.jpg</span><br><span class="line"></span><br><span class="line">#pyb.LED(BLUE_LED_PIN).off()</span><br><span class="line">print(&quot;Done! Reset the camera to see the saved image.&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>本次实物效果如下：</p>
+<p><strong><img src="/2020/12/02/K210%20——又来一个好玩的东西（图传）/code.png" title="This is an test image"></strong></p>
+<p><strong><img src="/2020/12/02/K210%20——又来一个好玩的东西（图传）/Physical.jpg" title="This is an test image"></strong></p>
+<p>陆续更新中…</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/02/K210 ——又来一个好玩的东西（图传）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-NBIOT_M531101" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -369,83 +586,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/12/02/NBIOT_M531101/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-K210 ——又来一个好玩的东西（图传）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/02/K210 ——又来一个好玩的东西（图传）/">K210 ——又来一个好玩的东西（图传）</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/02/K210 ——又来一个好玩的东西（图传）/" class="archive-article-date">
-  	<time datetime="2020-12-02T01:41:10.310Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这个是啥？</p>
-<hr>
-<p>​        出于对物联网兴趣在加上疫情在家自我隔离的缘故，制作本次 K210 高性能人工智能板卡的远程拍照，以及拍摄一小段视频的小Demo。</p>
-<p>​       后续的计划：</p>
-<ol>
-<li>板卡与通信模组通信，把拍摄的视频上传到服务器并在网页调用展示出来。</li>
-<li>制作app调用服务器视频流和照片。</li>
-</ol>
-<p>先看下本次拍摄照片并保存的代码    </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import sensor, image,lcd</span><br><span class="line"></span><br><span class="line">RED_LED_PIN = 1</span><br><span class="line">BLUE_LED_PIN = 3</span><br><span class="line"></span><br><span class="line">sensor.reset() # Initialize the camera sensor.</span><br><span class="line">sensor.set_pixformat(sensor.RGB565) # or sensor.GRAYSCALE</span><br><span class="line">sensor.set_framesize(sensor.QVGA) # or sensor.QQVGA (or others)</span><br><span class="line">sensor.skip_frames(10) # Let new settings take affect.</span><br><span class="line">sensor.set_framesize(sensor.QVGA)</span><br><span class="line">#红灯亮</span><br><span class="line">#pyb.LED(RED_LED_PIN).on()</span><br><span class="line">sensor.skip_frames(300) # Give the user time to get ready.</span><br><span class="line"></span><br><span class="line">#红灯灭，蓝灯亮</span><br><span class="line">#pyb.LED(RED_LED_PIN).off()</span><br><span class="line">#pyb.LED(BLUE_LED_PIN).on()</span><br><span class="line"></span><br><span class="line">#保存截取到的图片到SD卡</span><br><span class="line">print(&quot;You&apos;re on camera!&quot;)</span><br><span class="line">img=sensor.snapshot()				  # 把截取到的图片数据存储在img 里</span><br><span class="line">lcd.display(img)					  # 显示到屏幕上</span><br><span class="line">sensor.snapshot().save(&quot;example.jpg&quot;) # 保存到SD卡里并署名为 example.jpg</span><br><span class="line"></span><br><span class="line">#pyb.LED(BLUE_LED_PIN).off()</span><br><span class="line">print(&quot;Done! Reset the camera to see the saved image.&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>本次实物效果如下：</p>
-<p><strong><img src="/2020/12/02/K210%20——又来一个好玩的东西（图传）/code.png" title="This is an test image"></strong></p>
-<p><strong><img src="/2020/12/02/K210%20——又来一个好玩的东西（图传）/Physical.jpg" title="This is an test image"></strong></p>
-<p>陆续更新中…</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/02/K210 ——又来一个好玩的东西（图传）/">展开全文 >></a>
         </p>
       
 

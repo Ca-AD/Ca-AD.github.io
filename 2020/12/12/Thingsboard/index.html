@@ -6,28 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>gitee + typora 建立图片管理系统（简称图床） | 刘大的博客</title>
+  <title>ThingsBoard 环境搭建+数据传输 | 刘大的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="0. 前言 时间：2020/09/09 一个好用的图片服务器是衡量一篇好博客的标准。所以搭建一个云图片管理系统势在必行。特此把我用了一段时间的神器拿出来分享。 那么什么是图床呢？通俗一点就是直接复制一个链接粘贴在某个特定页面就能看到图片，所以很方便。 1. 所需要的工具PicGo: 一个用于快速上传图片并获取图片URL链接的工具 picgo：https://github.com/Molunerfi">
+  <meta name="description" content="0. 前言需要准备的工具如下  硬件： Win10电脑（最少8G RAM ）  软件：Docker         https://www.docker.com/get-started    ​          Chrome 浏览器    ​          MQTTX           https://mqttx.app/cn/   1. Docker 配置  参考官网教程：  换阿里源">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gitee + typora 建立图片管理系统（简称图床）">
-<meta property="og:url" content="http://yoursite.com/2020/12/02/Typora + gitee云图床建立/index.html">
+<meta property="og:title" content="ThingsBoard 环境搭建+数据传输">
+<meta property="og:url" content="http://yoursite.com/2020/12/12/Thingsboard/index.html">
 <meta property="og:site_name" content="刘大的博客">
-<meta property="og:description" content="0. 前言 时间：2020/09/09 一个好用的图片服务器是衡量一篇好博客的标准。所以搭建一个云图片管理系统势在必行。特此把我用了一段时间的神器拿出来分享。 那么什么是图床呢？通俗一点就是直接复制一个链接粘贴在某个特定页面就能看到图片，所以很方便。 1. 所需要的工具PicGo: 一个用于快速上传图片并获取图片URL链接的工具 picgo：https://github.com/Molunerfi">
+<meta property="og:description" content="0. 前言需要准备的工具如下  硬件： Win10电脑（最少8G RAM ）  软件：Docker         https://www.docker.com/get-started    ​          Chrome 浏览器    ​          MQTTX           https://mqttx.app/cn/   1. Docker 配置  参考官网教程：  换阿里源">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909091827.png">
-<meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909093517.png">
-<meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909093658.png">
-<meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909094339.png">
-<meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909085615.png">
-<meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909095720.png">
-<meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909095557.png">
-<meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909101029.png">
-<meta property="og:updated_time" content="2020-09-09T03:43:34.103Z">
+<meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212112258.png">
+<meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212112832.png">
+<meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212112906.png">
+<meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212113706.png">
+<meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212113444.png">
+<meta property="og:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212112143.png">
+<meta property="og:updated_time" content="2020-12-12T10:42:40.311Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="gitee + typora 建立图片管理系统（简称图床）">
-<meta name="twitter:description" content="0. 前言 时间：2020/09/09 一个好用的图片服务器是衡量一篇好博客的标准。所以搭建一个云图片管理系统势在必行。特此把我用了一段时间的神器拿出来分享。 那么什么是图床呢？通俗一点就是直接复制一个链接粘贴在某个特定页面就能看到图片，所以很方便。 1. 所需要的工具PicGo: 一个用于快速上传图片并获取图片URL链接的工具 picgo：https://github.com/Molunerfi">
-<meta name="twitter:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909091827.png">
+<meta name="twitter:title" content="ThingsBoard 环境搭建+数据传输">
+<meta name="twitter:description" content="0. 前言需要准备的工具如下  硬件： Win10电脑（最少8G RAM ）  软件：Docker         https://www.docker.com/get-started    ​          Chrome 浏览器    ​          MQTTX           https://mqttx.app/cn/   1. Docker 配置  参考官网教程：  换阿里源">
+<meta name="twitter:image" content="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212112258.png">
   
     <link rel="alternative" href="/atom.xml" title="刘大的博客" type="application/atom+xml">
   
@@ -163,44 +161,104 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Typora + gitee云图床建立" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Thingsboard" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      gitee + typora 建立图片管理系统（简称图床）
+      ThingsBoard 环境搭建+数据传输
     </h1>
   
 
         
-        <a href="/2020/12/02/Typora + gitee云图床建立/" class="archive-article-date">
-  	<time datetime="2020-12-02T01:41:10.320Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-02</time>
+        <a href="/2020/12/12/Thingsboard/" class="archive-article-date">
+  	<time datetime="2020-12-12T10:42:40.152Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><p> 时间：2020/09/09</p>
-<p>一个好用的图片服务器是衡量一篇好博客的标准。所以搭建一个云图片管理系统势在必行。特此把我用了一段时间的神器拿出来分享。</p>
-<p>那么什么是图床呢？通俗一点就是直接复制一个链接粘贴在某个特定页面就能看到图片，所以很方便。</p>
-<h2 id="1-所需要的工具"><a href="#1-所需要的工具" class="headerlink" title="1. 所需要的工具"></a>1. 所需要的工具</h2><p><strong>PicGo: 一个用于快速上传图片并获取图片URL链接的工具</strong></p>
-<p>picgo：<a href="https://github.com/Molunerfinn/PicGo/releases" target="_blank" rel="noopener">https://github.com/Molunerfinn/PicGo/releases</a></p>
-<p>*<em>gitee：云端软件开发协作平台  (存放图片的仓库) *</em></p>
-<p>gitee： <a href="https://gitee.com/" target="_blank" rel="noopener">https://gitee.com/</a></p>
-<p><strong>Typora: 一款支持实时预览的 Markdown 文本编辑器。它有 OS X、Windows、Linux 三个平台的版本，并且由于仍在测试中，是完全免费的（编辑博客文档的软件)</strong></p>
-<p>Typora: <a href="https://typora.io/" target="_blank" rel="noopener">https://typora.io/</a></p>
-<h2 id="2-实现的步骤"><a href="#2-实现的步骤" class="headerlink" title="2. 实现的步骤"></a>2. 实现的步骤</h2><h4 id="1-登录gitee-并注册账号然后新建仓库如下操作："><a href="#1-登录gitee-并注册账号然后新建仓库如下操作：" class="headerlink" title="1.   登录gitee 并注册账号然后新建仓库如下操作："></a>1.   登录gitee 并注册账号然后新建仓库如下操作：</h4><p>​     在gitee上新建一个仓库，是否开源里选择进行公开，注意你的  *<em>青色画线部分   和  仓库名称 *</em> 等会要用到。</p>
-<p>​     <img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909091827.png" alt></p>
-<h4 id="2-然后在右上角头像里-点击设置-进入如下页面。"><a href="#2-然后在右上角头像里-点击设置-进入如下页面。" class="headerlink" title="2.  然后在右上角头像里 *点击设置 * 进入如下页面。"></a>2.  然后在右上角头像里 *<em>点击设置 *</em> 进入如下页面。</h4><p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909093517.png" alt="004"></p>
-<p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909093658.png" alt="003"></p>
-<h4 id="3-点击提交后会生成一个私人令牌的代码，一定要记下这串字符-后边会用到。至此-gitee-设置完成"><a href="#3-点击提交后会生成一个私人令牌的代码，一定要记下这串字符-后边会用到。至此-gitee-设置完成" class="headerlink" title="3.  点击提交后会生成一个私人令牌的代码，一定要记下这串字符 后边会用到。至此 gitee 设置完成"></a>3.  点击提交后会生成一个私人令牌的代码，<strong>一定要记下这串字符</strong> 后边会用到。至此 gitee 设置完成</h4><p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909094339.png" alt="222"></p>
-<h4 id="4-下载-PicGo，安装后在搜索框搜索安装-gitee-插件-，我这里是用的-gitee-2-0-3，我的已经安装-。"><a href="#4-下载-PicGo，安装后在搜索框搜索安装-gitee-插件-，我这里是用的-gitee-2-0-3，我的已经安装-。" class="headerlink" title="4.  下载 PicGo，安装后在搜索框搜索安装 gitee 插件 ，我这里是用的 gitee 2.0.3，我的已经安装 。"></a>4.  下载 PicGo，安装后在搜索框搜索安装 gitee 插件 ，我这里是用的 gitee 2.0.3，我的已经安装 。</h4><p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909085615.png" alt="img"></p>
-<h4 id="5-安装gitee-插件完成后如下配置："><a href="#5-安装gitee-插件完成后如下配置：" class="headerlink" title="5.   安装gitee 插件完成后如下配置："></a>5.   安装gitee 插件完成后如下配置：</h4><p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909095720.png" alt></p>
-<h4 id="6-如下所示的1-应填写对应你账号的-步骤1-青色部分的；2-填写仓库名称；3-填写刚才获取到的私人令牌点击确定设置完毕。这个时候就可以在-PicGo-的上传区上传图片了。"><a href="#6-如下所示的1-应填写对应你账号的-步骤1-青色部分的；2-填写仓库名称；3-填写刚才获取到的私人令牌点击确定设置完毕。这个时候就可以在-PicGo-的上传区上传图片了。" class="headerlink" title="6.   如下所示的1 应填写对应你账号的 步骤1 青色部分的；2 填写仓库名称；3  填写刚才获取到的私人令牌点击确定设置完毕。这个时候就可以在 PicGo 的上传区上传图片了。"></a>6.   如下所示的<strong>1 应填写对应你账号的 步骤1 青色部分的；2 填写仓库名称；3  填写刚才获取到的私人令牌</strong>点击确定设置完毕。这个时候就可以在 PicGo 的上传区上传图片了。</h4><p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909095557.png" alt="225"></p>
-<h4 id="7-Typora-设置如下：设置完成后，拖拽一张图片到-Typora-就可以显示出来这张照片。并上传到-gitee-图床中。ojbk"><a href="#7-Typora-设置如下：设置完成后，拖拽一张图片到-Typora-就可以显示出来这张照片。并上传到-gitee-图床中。ojbk" class="headerlink" title="7.    Typora 设置如下：设置完成后，拖拽一张图片到 Typora  就可以显示出来这张照片。并上传到 gitee 图床中。ojbk"></a>7.    Typora 设置如下：设置完成后，拖拽一张图片到 Typora  就可以显示出来这张照片。并上传到 gitee 图床中。ojbk</h4><p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20200909101029.png" alt="226"></p>
+        <h5 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a><strong>0. 前言</strong></h5><p>需要准备的工具如下</p>
+<ol>
+<li><p>硬件： Win10电脑（最少8G RAM ）</p>
+</li>
+<li><p>软件：Docker         <a href="https://www.docker.com/get-started" target="_blank" rel="noopener">https://www.docker.com/get-started</a>  </p>
+<p> ​          Chrome 浏览器  </p>
+<p> ​          MQTTX           <a href="https://mqttx.app/cn/" target="_blank" rel="noopener">https://mqttx.app/cn/</a> </p>
+<p> <strong>1. Docker 配置</strong></p>
+<p> 参考官网教程：</p>
+<ol>
+<li><p>换阿里源 </p>
+</li>
+<li><p><a href="https://hub.docker.com/r/thingsboard/tb-postgres/?ref=login" target="_blank" rel="noopener">https://hub.docker.com/r/thingsboard/tb-postgres/?ref=login</a></p>
+</li>
+<li><p><a href="http://www.ithingsboard.com/docs/user-guide/install/docker-windows/" target="_blank" rel="noopener">http://www.ithingsboard.com/docs/user-guide/install/docker-windows/</a></p>
+<p>注意需要先拉取    thingsboard/tb-postgres  </p>
+<p>具体步骤： </p>
+</li>
+<li><p>打开w10 cmd 进入如下界面输入   docker pull thingsboard/tb-postgres</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker volume create mytb-data</span><br><span class="line">docker volume create mytb-logs</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -p 9090:9090 -p 1883:1883 -p 5683:5683/udp -v mytb-data:/data -v ~/mytb-logs:/var/log/thingsboard --name mytb --restart always thingsboard/tb-postgres</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>看到 Success 就是安装成功，稍等一会，给Docker 运行ThingsBoard一点时间，看到如下图所示就没问题了。</p>
+<p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212112258.png" alt></p>
+</li>
+</ol>
+</li>
+<li><p>如下所示是我用 MQTTX 软件连接到TB有如下显示。</p>
+</li>
+</ol>
+<pre><code>6. 这时用 Chrome 浏览器访问   http://localhost:9090   =  http://192.168.0.119:9090/login
+
+**2. ThingsBoard 配置**
+
+1. 登录租户管理员然后点击  客户 -- 添加客户 -- 自拟标题  -- 点击添加
+
+    ![](https://gitee.com/liudi123club/images/raw/master/Markdown/20201212113852.png)
+
+2. 设备 --添加设备 --添加新设备 -- 自拟名称 -- 自拟设备类型  -- 点击添加
+
+    ![](https://gitee.com/liudi123club/images/raw/master/Markdown/20201212113812.png)
+
+3. 仪表板库 -- 添加仪表板 --  创建新的仪表板  -- 自拟标题  -- 点击添加
+
+    ![](https://gitee.com/liudi123club/images/raw/master/Markdown/20201212113950.png)
+
+4. 打开仪表板  -- 进入编辑模式 -- 添加新的部件 -- 选择部件 -- Analogue gauges --Temperature --添加部件 -- 填写 -- 实体别名 -- 设备时间/属性 -- 点击添加
+
+
+
+5. 配置连接的用户名如下所示，这个用户名要和MQTTX 配置的名称一样。
+
+    ![](https://gitee.com/liudi123club/images/raw/master/Markdown/20201212113343.png)</code></pre><h5 id="3-MQTTX-配置"><a href="#3-MQTTX-配置" class="headerlink" title="3. MQTTX 配置"></a><strong>3. MQTTX 配置</strong></h5><ol>
+<li><p>查找本机地址  打开选择命令提示符窗口  – ipconfig   </p>
+</li>
+<li><p>根据你联网方式 选择 <strong>无线局域网适配器WLAN</strong> 和 <strong>以太网适配器</strong> 下的 IPV4 地址，如下所示</p>
+<p> 这里我用的WiFi联网 选择无线适配器下 IPV4 地址。</p>
+<p> <img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212112832.png" alt></p>
+</li>
+<li><p>填写配置MQTTX</p>
+<p> <img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212112906.png" alt></p>
+</li>
+<li><p>发送消息 &amp; 接收消息</p>
+<p> 其中主题必须是   v1/devices/me/telemetry  或  v1/devices/me/rpc/request/+  </p>
+<p> 用 json 格式把数据发上去，ThingsBoard会自动解析。</p>
+<p> 上报 topic     v1/devices/me/telemetry                  message 例如 ： { “temp”: “33”} 如下图所示</p>
+<p> <img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212113706.png" alt></p>
+</li>
+</ol>
+<pre><code>订阅 topic     v1/devices/me/rpc/request/+           message 例如 ： { &quot;LED3&quot;: &quot;open&quot;}</code></pre><ol start="5">
+<li><p>打开 Thingsboard 的仪表板，就能看到数据。</p>
+<p> <img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212113444.png" alt></p>
+<p> 如果看不到数据就进入编辑模式，选择一下刚才上传的数据名称就能看到了，如下所示：</p>
+</li>
+</ol>
+<p><img src="https://gitee.com/liudi123club/images/raw/master/Markdown/20201212112143.png" alt></p>
 
       
 
@@ -280,7 +338,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/12/02/Typora + gitee云图床建立/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/12/12/Thingsboard/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -294,18 +352,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/12/02/EC200S-CN 固件烧录/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          EC200S-CN更新固件
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/12/02/K210 ——又来一个好玩的东西（图传）/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">K210 ——又来一个好玩的东西（图传）</div>
+    <a href="/2020/12/02/EC200S-CN 固件烧录/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">EC200S-CN更新固件</div>
       <i class="icon-circle-right"></i>
     </a>
   
